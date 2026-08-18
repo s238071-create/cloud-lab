@@ -7,6 +7,7 @@ function App() {
   const [studentId, setStudentId] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [editingId, setEditingId] = useState(null);
 
 
   useEffect(() => {
@@ -59,6 +60,81 @@ function App() {
   }
 };
 
+const updateStudent = async () => {
+  try {
+    const response = await fetch(
+      `https://expert-happiness-jr4v5wvr4r6w25jw9-5000.app.github.dev/api/students/${editingId}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          studentId: studentId,
+          name: name,
+          email: email
+        })
+      }
+    );
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.error || "Cập nhật sinh viên thất bại");
+    }
+
+    alert("Cập nhật sinh viên thành công");
+
+    setStudents(
+      students.map(student =>
+        student._id === editingId ? data : student
+      )
+    );
+
+    setStudentId("");
+    setName("");
+    setEmail("");
+    setEditingId(null);
+
+  } catch (error) {
+    console.error("PUT ERROR:", error);
+    alert("Có lỗi xảy ra: " + error.message);
+  }
+};
+
+const startEdit = (student) => {
+  setEditingId(student._id);
+  setStudentId(student.studentId);
+  setName(student.name);
+  setEmail(student.email);
+};
+
+const deleteStudent = async (id) => {
+  try {
+    const response = await fetch(
+      `https://expert-happiness-jr4v5wvr4r6w25jw9-5000.app.github.dev/api/students/${id}`,
+      {
+        method: "DELETE"
+      }
+    );
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.error || "Xóa sinh viên thất bại");
+    }
+
+    alert("Xóa sinh viên thành công");
+
+    setStudents(
+      students.filter(student => student._id !== id)
+    );
+
+  } catch (error) {
+    console.error("DELETE ERROR:", error);
+    alert("Có lỗi xảy ra: " + error.message);
+  }
+};
 
 
 
@@ -100,8 +176,8 @@ function App() {
       <br/><br/>
 
 
-      <button onClick={addStudent}>
-  Thêm sinh viên
+      <button onClick={editingId ? updateStudent : addStudent}>
+   {editingId ? "Cập nhật sinh viên" : "Thêm sinh viên"}
 </button>
 
 
@@ -116,6 +192,7 @@ function App() {
             <th>MSSV</th>
             <th>Họ tên</th>
             <th>Email</th>
+            <th>Thao tác</th>
           </tr>
         </thead>
 
@@ -130,6 +207,15 @@ function App() {
                 <td>{student.studentId}</td>
                 <td>{student.name}</td>
                 <td>{student.email}</td>
+                <td>
+  <button onClick={() => startEdit(student)}>
+    Sửa
+  </button>
+
+  <button onClick={() => deleteStudent(student._id)}>
+    Xóa
+  </button>
+</td>
 
               </tr>
 
