@@ -12,7 +12,7 @@ function App() {
 
   useEffect(() => {
   fetch(
-    "https://expert-happiness-jr4v5wvr4r6w25jw9-5000.app.github.dev/api/students"
+    "http://localhost:5000/api/students"
   )
     .then(res => res.json())
     .then(data => setStudents(data))
@@ -22,7 +22,7 @@ function App() {
   const addStudent = async () => {
   try {
     const response = await fetch(
-      "https://expert-happiness-jr4v5wvr4r6w25jw9-5000.app.github.dev/api/students",
+      "http://localhost:5000/api/students",
       {
         method: "POST",
         headers: {
@@ -63,7 +63,7 @@ function App() {
 const updateStudent = async () => {
   try {
     const response = await fetch(
-      `https://expert-happiness-jr4v5wvr4r6w25jw9-5000.app.github.dev/api/students/${editingId}`,
+      `http://localhost:5000/api/students/${editingId}`,
       {
         method: "PUT",
         headers: {
@@ -112,7 +112,7 @@ const startEdit = (student) => {
 const deleteStudent = async (id) => {
   try {
     const response = await fetch(
-      `https://expert-happiness-jr4v5wvr4r6w25jw9-5000.app.github.dev/api/students/${id}`,
+      `http://localhost:5000/api/students/${id}`,
       {
         method: "DELETE"
       }
