@@ -12,7 +12,10 @@ function App() {
 
   useEffect(() => {
   fetch(
-    "http://localhost:5000/api/students"
+<<<<<<< HEAD
+=======
+    ("/api/students")
+>>>>>>> 37e46cd (Complete Lab 04 Docker Hub Multi-Container)
   )
     .then(res => res.json())
     .then(data => setStudents(data))
@@ -22,7 +25,10 @@ function App() {
   const addStudent = async () => {
   try {
     const response = await fetch(
-      "http://localhost:5000/api/students",
+<<<<<<< HEAD
+=======
+      ("/api/students"),
+>>>>>>> 37e46cd (Complete Lab 04 Docker Hub Multi-Container)
       {
         method: "POST",
         headers: {
@@ -63,7 +69,10 @@ function App() {
 const updateStudent = async () => {
   try {
     const response = await fetch(
-      `http://localhost:5000/api/students/${editingId}`,
+<<<<<<< HEAD
+=======
+      `/api/students/${editingId}`,
+>>>>>>> 37e46cd (Complete Lab 04 Docker Hub Multi-Container)
       {
         method: "PUT",
         headers: {
@@ -112,10 +121,11 @@ const startEdit = (student) => {
 const deleteStudent = async (id) => {
   try {
     const response = await fetch(
-      `http://localhost:5000/api/students/${id}`,
-      {
-        method: "DELETE"
-      }
+<<<<<<< HEAD
+=======
+      `/api/students/${id}`, {
+>>>>>>> 37e46cd (Complete Lab 04 Docker Hub Multi-Container)
+        method: "DELETE
     );
 
     const data = await response.json();
@@ -141,7 +151,7 @@ const deleteStudent = async (id) => {
   return (
     <div>
 
-      <h1>Quản lý sinh viên</h1>
+      <h1>Quản lý sinh viên - Version 2.0</h1>
 
 
       <h2>Thêm sinh viên</h2>
