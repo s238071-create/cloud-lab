@@ -1,4 +1,6 @@
+
 import { useEffect, useState } from "react";
+const API_URL = "https://mern-backend-s238071.onrender.com/api/students";
 
 function App() {
 
@@ -12,10 +14,7 @@ function App() {
 
   useEffect(() => {
   fetch(
-<<<<<<< HEAD
-=======
     ("/api/students")
->>>>>>> 37e46cd (Complete Lab 04 Docker Hub Multi-Container)
   )
     .then(res => res.json())
     .then(data => setStudents(data))
@@ -25,10 +24,7 @@ function App() {
   const addStudent = async () => {
   try {
     const response = await fetch(
-<<<<<<< HEAD
-=======
-      ("/api/students"),
->>>>>>> 37e46cd (Complete Lab 04 Docker Hub Multi-Container)
+      (API_URL),
       {
         method: "POST",
         headers: {
@@ -69,10 +65,7 @@ function App() {
 const updateStudent = async () => {
   try {
     const response = await fetch(
-<<<<<<< HEAD
-=======
-      `/api/students/${editingId}`,
->>>>>>> 37e46cd (Complete Lab 04 Docker Hub Multi-Container)
+      `${API_URL}/${editingId}`,
       {
         method: "PUT",
         headers: {
@@ -121,12 +114,9 @@ const startEdit = (student) => {
 const deleteStudent = async (id) => {
   try {
     const response = await fetch(
-<<<<<<< HEAD
-=======
-      `/api/students/${id}`, {
->>>>>>> 37e46cd (Complete Lab 04 Docker Hub Multi-Container)
-        method: "DELETE
-    );
+      `${API_URL}/${id}`, {
+        method: "DELETE"
+  });
 
     const data = await response.json();
 
@@ -151,7 +141,7 @@ const deleteStudent = async (id) => {
   return (
     <div>
 
-      <h1>Quản lý sinh viên - Version 2.0</h1>
+      <h1>Quản lý sinh viên - Version 2.1</h1>
 
 
       <h2>Thêm sinh viên</h2>

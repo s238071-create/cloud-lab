@@ -6,8 +6,30 @@ require("dotenv").config();
 
 const app = express();
 
-app.use(cors());
+
+const allowedOrigins = [
+    process.env.CLIENT_URL,
+    "http://localhost:5173",
+    "http://localhost:3000"
+].filter(Boolean);
+
+app.use(cors({
+    origin: function (origin, callback) {
+        if (
+            !origin ||
+            allowedOrigins.includes(origin) ||
+            process.env.NODE_ENV !== "production"
+        ) {
+            return callback(null, true);
+        }
+
+        return callback(new Error("Not allowed by CORS"));
+    },
+    credentials: true
+}));
+
 app.use(express.json());
+
 
 // Kết nối MongoDB Atlas
 mongoose.connect(process.env.MONGODB_URI)
