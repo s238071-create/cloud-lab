@@ -1,7 +1,6 @@
 
 import { useEffect, useState } from "react";
-const API_URL = "https://mern-backend-s238071.onrender.com/api/students";
-
+const API_URL = "/api/students";
 function App() {
 
   const [students, setStudents] = useState([]);
@@ -141,7 +140,7 @@ const deleteStudent = async (id) => {
   return (
     <div>
 
-      <h1>Quản lý sinh viên - Version 2.1</h1>
+      <h1>Quản lý sinh viên - Version 2.0</h1>
 
 
       <h2>Thêm sinh viên</h2>

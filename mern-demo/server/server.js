@@ -35,6 +35,7 @@ app.use(express.json());
 mongoose.connect(process.env.MONGODB_URI)
     .then(() => {
         console.log("MongoDB Atlas connected");
+        console.log("Backend version 1.2 - Auto Deploy Test");
     })
     .catch((error) => {
         console.log("MongoDB connection error:", error);
@@ -61,6 +62,14 @@ app.get("/api/students", async (req, res) => {
     }
 });
 
+
+app.get('/health', (req, res) => {
+  res.status(200).json({
+    status: 'UP',
+    timestamp: new Date(),
+    uptime: process.uptime()
+  });
+});
 
 // POST - thêm sinh viên
 app.post("/api/students", async (req, res) => {
